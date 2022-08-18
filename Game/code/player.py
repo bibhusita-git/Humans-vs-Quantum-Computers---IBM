@@ -3,9 +3,10 @@ from settings import player_speed
 from support import import_folder
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos):
+    def __init__(self, pos, surface):
         super().__init__()
 
+        ## Player
         self.import_character_assets()
         self.frame_index = 0
         self.animation_speed = 0.15
@@ -18,6 +19,12 @@ class Player(pygame.sprite.Sprite):
         self.speed = player_speed # speed of player
         self.gravity = 0.8
         self.jump_speed = -16
+
+        ## Dust Particles
+        self.import_dust_run_particles()
+        self.dust_frame_index = 0
+        self.dust_animation_speed = 0.15
+        self.display_surface = surface
 
         ## player status
         self.status = 'idle'
@@ -34,6 +41,9 @@ class Player(pygame.sprite.Sprite):
         for animation in self.animations.keys():
             full_path = character_path + animation
             self.animations[animation] = import_folder(full_path)
+
+    def import_dust_run_particles(self):
+        self.dust_run_particles = import_folder('Game/graphics/character/dust_particles/run')
 
     def animate(self):
         animation = self.animations[self.status]
@@ -63,7 +73,6 @@ class Player(pygame.sprite.Sprite):
             self.rect = self.image.get_rect(topleft = self.rect.topleft)
         elif self.on_ceiling:
             self.rect = self.image.get_rect(midtop = self.rect.midtop)
-
 
     def get_input(self):
         keys = pygame.key.get_pressed()

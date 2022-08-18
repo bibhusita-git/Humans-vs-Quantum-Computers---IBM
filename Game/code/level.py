@@ -36,7 +36,7 @@ class Level:
 
                 # Draw player at initial Position 'P'
                 if cell == 'P':
-                    player = Player((x, y))
+                    player = Player((x, y), self.display_surface)
                     self.player.add(player)
 
     # Creating a camera to scroll level/screen in horizontal direction according to player movement
