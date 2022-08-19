@@ -3,7 +3,7 @@ from settings import player_speed
 from support import import_folder
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, surface):
+    def __init__(self, pos, surface, create_jump_particles):
         super().__init__()
 
         ## Player
@@ -25,6 +25,7 @@ class Player(pygame.sprite.Sprite):
         self.dust_frame_index = 0
         self.dust_animation_speed = 0.15
         self.display_surface = surface
+        self.create_jump_particles = create_jump_particles
 
         ## player status
         self.status = 'idle'
@@ -67,12 +68,28 @@ class Player(pygame.sprite.Sprite):
             self.rect = self.image.get_rect(bottomleft = self.rect.bottomleft)
         elif self.on_ground:
             self.rect = self.image.get_rect(midbottom = self.rect.midbottom)
-        if self.on_ceiling and self.on_right:
+        elif self.on_ceiling and self.on_right:
             self.rect = self.image.get_rect(topright = self.rect.topright)
         elif self.on_ceiling and self.on_left:
             self.rect = self.image.get_rect(topleft = self.rect.topleft)
         elif self.on_ceiling:
             self.rect = self.image.get_rect(midtop = self.rect.midtop)
+
+    def run_dust_animation(self):
+        if self.status == 'run' and self.on_ground:
+            self.dust_frame_index += self.dust_animation_speed
+            if self.dust_frame_index > len(self.dust_run_particles):
+                self.dust_frame_index = 0
+
+            dust_particle = self.dust_run_particles[int(self.dust_frame_index)]
+
+            if self.facing_right:
+                pos = self.rect.bottomleft - pygame.math.Vector2(6, 10) # offset for corect posion
+                self.display_surface.blit(dust_particle, pos)
+            else: # facing left
+                pos = self.rect.bottomright - pygame.math.Vector2(6, 10) # offset for corect posion
+                flipped_dust_particle = pygame.transform.flip(dust_particle, True, False)
+                self.display_surface.blit(flipped_dust_particle, pos)
 
     def get_input(self):
         keys = pygame.key.get_pressed()
@@ -80,11 +97,11 @@ class Player(pygame.sprite.Sprite):
         ## horizontal movement
         if keys[pygame.K_RIGHT]:
             # increase the speed of player in right direction
-            self.direction.x += 1
+            self.direction.x = 1
             self.facing_right = True
         elif keys[pygame.K_LEFT]:
             # increase the speed of player in left direction
-            self.direction.x -= 1
+            self.direction.x = -1
             self.facing_right = False
         else:
             self.direction.x = 0
@@ -93,11 +110,12 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_SPACE] or keys[pygame.K_UP]:
             if self.direction.y == 0: # or if self.on_ground:jump only when player is on ground and do not jump when player already is in air
                 self.jump()
+                self.create_jump_particles(self.rect.midbottom)
     
     def get_status(self):
         if self.direction.y < 0:
             self.status = 'jump'
-        elif self.direction.y > (0 + self.gravity): # since when player is on ground gravity still applies on it so dircction.y = 0 + self.gravity
+        elif self.direction.y > 1: # 1 > (0 + self.gravity): since when player is on ground gravity still applies on it so dircction.y = 0 + self.gravity
             self.status = 'fall'
         else:
             if self.direction.x != 0:
@@ -116,3 +134,4 @@ class Player(pygame.sprite.Sprite):
         self.get_input()
         self.get_status()
         self.animate()
+        self.run_dust_animation()
