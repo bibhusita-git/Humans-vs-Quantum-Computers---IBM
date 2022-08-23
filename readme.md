@@ -10,7 +10,7 @@ The **`QuantumPermutations`** directory contains all materials required for impl
 - The **`Tutorial_QPSS.ipynb`** file is a self-contained tutorial on the secret sharing protocol. The structure of the tutorial is as follows
     - The **Generating Permutations on Quantum Computers** section gives a short intorduciton to our quantum algorithm of creating an equal superposition of permutations. We give some example implementations fo cases with few qubits and also describe the general procedure for arbitrary number of states
     - The **Applications to Secret Sharing** section describes how the permutation generation procedure could be used for Secret Sharing, we also show some example implementations of our protocol.
-    - The **Note to Game Players** section gives an overview of how the ideas developed so far would be used for our game, we discuss some alernate ideas for the game that could be realised under the same secret shariiing protocol. 
+    - The **Note to Game Players** section gives an overview of how the ideas developed so far would be used for our game, we discuss some alernate ideas for the game that could be realised under the same secret sharing protocol. 
     - In **Drawbacks and Possible Workarounds** we mention the drawabacks of our algorithm that limits its practical utility and also discuss possible ways using which this protocol could be used to made more robust.   
 
 
