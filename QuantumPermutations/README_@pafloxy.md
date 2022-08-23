@@ -1,6 +1,6 @@
 #### Quantum Permutation Algorithm and Secret Sharing 
 
-The **`QuantumPermutations`** directory contains all materials required for implmenting the secret sharing algorithm . There are two files in this directory 
+The **`QuantumPermutations`** directory contains all materials required for implmenting the secret sharing algorithm . It is recommended to go thtough the tutorial file **`Tutorial_QPSS.ipynb`** before moving ahead. The directory contains the following files,
 
 - The **`quantum_permutation_utils.py`** file has the all necessary imports and and other utility functions defined by us necessary to facilitate the implmentation.
 - The **`Tutorial_QPSS.ipynb`** file is a self-contained tutorial on the secret sharing protocol. The structure of the tutorial is as follows
