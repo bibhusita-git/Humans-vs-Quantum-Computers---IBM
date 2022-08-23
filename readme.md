@@ -1,7 +1,7 @@
 # Womainium IBM Challenge 2022: Humans vs. Quantum Computers
 
 **Task  Given:** Create a working interactive ‘program’ (it can be a website, game, app, etc.) in which a human user is facing off against a quantum computer. This is broad on purpose - the program can be built in many different ways. Your program should implement strategies that seriously challenge the human player. The implementation must utilize more than just probabilities related to measuring quantum states. You must use Qiskit to program the computer’s gameplay strategy, and as much as possible, the strategy should be implemented with quantum circuits and quantum gates on real quantum hardware (although using the Simulator is understandable given the time limit).
-
+ 
 ## Quantum Permutation Algorithm and Secret Sharing 
 
 The **`QuantumPermutations`** directory contains all materials required for implmenting the secret sharing algorithm . It is recommended to go thtough the tutorial file **`Tutorial_QPSS.ipynb`** before moving ahead. The directory contains the following files,
@@ -9,8 +9,10 @@ The **`QuantumPermutations`** directory contains all materials required for impl
 - The **`quantum_permutation_utils.py`** file has the all necessary imports and and other utility functions defined by us necessary to facilitate the implmentation.
 - The **`Tutorial_QPSS.ipynb`** file is a self-contained tutorial on the secret sharing protocol. The structure of the tutorial is as follows
     - The **Generating Permutations on Quantum Computers** section gives a short intorduciton to our quantum algorithm of creating an equal superposition of permutations. We give some example implementations fo cases with few qubits and also describe the general procedure for arbitrary number of states
-    - The **Applications to Secret Sharing** section describes how the permutation generation procedure could be used for Secret Sharing.
+    - The **Applications to Secret Sharing** section describes how the permutation generation procedure could be used for Secret Sharing, we also show some example implementations of our protocol.
+    - The **Note to Game Players** section gives an overview of how the ideas developed so far would be used for our game, we discuss some alernate ideas for the game that could be realised under the same secret shariiing protocol. 
     - In **Drawbacks and Possible Workarounds** we mention the drawabacks of our algorithm that limits its practical utility and also discuss possible ways using which this protocol could be used to made more robust.   
+
 
 ## About Game: QuantumV
 
